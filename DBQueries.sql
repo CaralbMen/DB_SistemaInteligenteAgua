@@ -1,0 +1,1 @@
+-- file for db, tables and relations creation
