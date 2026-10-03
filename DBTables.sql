@@ -161,26 +161,52 @@ CREATE TABLE Zonas_abastecimiento(
 
 -- ESTAS LAS AGREGUE YO CHARLY CHECALAS O NADA 
 -- 19. TABLA INCIDENCIAS
+create table tipos_incidencias(
+    id serial primary key,
+    tipo varchar(20),
+    descripcion text
+);
 CREATE TABLE Incidencias(
     id SERIAL PRIMARY KEY,
-    tipo VARCHAR(50) NOT NULL, -- fuga, falta_suministro, mala_calidad
+    id_tipo int, -- fuga, falta_suministro, mala_calidad
     descripcion TEXT,
     fecha DATE NOT NULL,
     id_cliente INT NOT NULL,
     CONSTRAINT fk_incidencia_cliente FOREIGN KEY (id_cliente) REFERENCES Clientes(id),
-    CONSTRAINT chk_tipo_incidencia CHECK (tipo IN ('fuga','falta_suministro','mala_calidad'))
+    CONSTRAINT fk_tipo_incidencia FOREIGN KEY (id_tipo) REFERENCES tipos_incidencias(id)
 );
 
 -- 20. TABLA ORDENES DE TRABAJO
 CREATE TABLE Ordenes_trabajo(
     id SERIAL PRIMARY KEY,
     id_incidencia INT,
-    cuadrilla_asignada VARCHAR(50) NOT NULL,
-    estado VARCHAR(50) NOT NULL, -- pendiente, en_proceso, finalizada
+    id_caudrilla int,
+    id_estado int, -- pendiente, en_proceso, finalizada
     fecha_inicio DATE,
     fecha_fin DATE,
     CONSTRAINT fk_orden_incidencia FOREIGN KEY (id_incidencia) REFERENCES Incidencias(id),
-    CONSTRAINT chk_estado_orden CHECK (estado IN ('pendiente','en_proceso','finalizada'))
+    constraint fk_cuadrilla_orden foreign key(id_cuadrilla) references cuadrillas(id),
+    CONSTRAINT fk_estado_orden foreign key(id_estado) references estados_ordenes(id)
+
+);
+create table estados_ordenes(
+    id serial primary key,
+    estado varchar(20)
+);
+create table cuadrillas(
+    id serial primary key,
+    nombre varchar(30)
+);
+create table empleados(
+    id serial primary key,
+    nombre varchar(20),
+    apaterno varchar(20),
+    amaterno varchar(20),
+    correo varchar(50),
+    id_domicilio int,
+    id_cuadrilla int,
+    constraint fk_ubicacion_empleado foreign key(id_domicilio) references Ubicaciones(id),
+    constraint fk_cuadrilla_empleado foreign key(id_cuadrilla) references cuadrillas(id)
 );
 
 -- 21. TABLA EVENTOS VALVULAS
@@ -188,8 +214,14 @@ CREATE TABLE Eventos_valvulas(
     id SERIAL PRIMARY KEY,
     id_valvula INT,
     fecha TIMESTAMP NOT NULL,
-    nuevo_estado VARCHAR(50) NOT NULL, -- abierta, cerrada, mantenimiento
+    id_estado_actual int,
+    id_estado_anterior int, -- abierta, cerrada, mantenimiento
     motivo VARCHAR(100),
     CONSTRAINT fk_evento_valvula FOREIGN KEY (id_valvula) REFERENCES Activos(id),
-    CONSTRAINT chk_estado_valvula CHECK (nuevo_estado IN ('abierta','cerrada','mantenimiento'))
+    CONSTRAINT fk_status_actual_valvula foreign key(id_estado_actual) REFERENCES estados_valvulas(id),
+    CONSTRAINT fk_status_anterior_valvula foreign key(id_estado_anterior) REFERENCES estados_valvulas(id)
+);
+create table estados_valvulas(
+    id serial primary KEy,
+    estado varchar(30)
 );
