@@ -131,28 +131,34 @@
         correo VARCHAR(50) NOT NULL UNIQUE,
         telefono VARCHAR(15)
     );
-    -- 17.TABLA PROPIEDAD CLIENTE
-    CREATE TABLE Propiedad_clientes(
+    -- 17. TABLA TIPOS PROPIEDAD
+    CREATE TABLE Tipos_propiedad (
+        id SERIAL PRIMARY KEY,
+        tipo VARCHAR(30) NOT NULL
+    );
+    -- 18.TABLA PROPIEDAD CLIENTE
+    CREATE TABLE Propiedades(
         id SERIAL PRIMARY KEY,
         id_cliente INT NOT NULL,
         id_ubicacion INT NOT NULL,
+        id_tipo_propiedad int not null,
         CONSTRAINT fk_propiedad_cliente FOREIGN KEY (id_cliente) REFERENCES Clientes(id),
         CONSTRAINT fk_propiedad_ubicacion FOREIGN KEY (id_ubicacion) REFERENCES Ubicaciones(id)
     );
-    -- 18. TABLA ESTADOS_SERVICIOS
+    -- 19. TABLA ESTADOS_SERVICIOS
     -- activo, inactivo, cancelado, pendiente de pago, etc...
     create table estados_servicios(
         id serial primary key,
         estado varchar(30)
     );
-    -- 19.TABLA SERVICIOS
+    -- 20.TABLA SERVICIOS
     CREATE TABLE Servicios(
         id SERIAL PRIMARY KEY,
-        id_propiedad_cliente INT NOT NULL,
+        id_propiedad INT NOT NULL,
         id_medidor int not null,
         id_estado int not null,
         id_zona_abastecimiento int not null,
-        CONSTRAINT fk_servicio_propiedad_cliente FOREIGN KEY (id_propiedad_cliente) REFERENCES Propiedad_clientes(id),
+        CONSTRAINT fk_servicio_propiedad_cliente FOREIGN KEY (id_propiedad) REFERENCES Propiedades(id),
         constraint fk_medidor_servicio foreign key(id_medidor) references activos(id),
         constraint fk_estado_servicio foreign key(id_estado) references estados_servicios(id),
         constraint fk_zona_servicio foreign key(id_zona_abastecimiento) references Zonas_abastecimiento(id)
@@ -160,7 +166,7 @@
 -- TERMINAN TABLAS DE USUARIOS, PROPIEDADES Y SERVICIOS
 
 -- INICIAN TABLAS DE LECTURAS
-    -- 20. TABLA LECTURAS
+    -- 21. TABLA LECTURAS
     create table lecturas(
         id serial primary key,
         fecha_hora timestamp default current_timestamp,
