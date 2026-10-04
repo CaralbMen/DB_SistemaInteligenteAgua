@@ -1,6 +1,6 @@
 -- 
 -- file for queries
-CREATE DATABASE SistemaAgua;
+-- CREATE DATABASE SistemaAgua;
 
 -- INICIAN CATALOGOS PARA LAS UBICACIONES
     -- 1.TABLA PAISES
