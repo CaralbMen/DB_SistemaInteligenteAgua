@@ -70,7 +70,7 @@ INSERT INTO Municipios (nombre, id_estado) VALUES
 -- Ciudades
 INSERT INTO Ciudades (nombre, id_municipio) VALUES
     ('Santiago de Querétaro', 1),
-    ('Santiago de Querétaro', 2),
+    ('El Pueblito', 2),
     ('La Cañada', 3),
     ('San Juan del Río', 4),
     ('Celaya', 5),
@@ -138,26 +138,26 @@ INSERT INTO Calles (nombre, id_colonia) VALUES
 
 -- Ubicaciones
 INSERT INTO Ubicaciones (no_exterior, no_interior, referencia, id_calle) VALUES
-    ('101', '1', 'Ubicación de prueba 1', 1),
-    ('102', NULL, 'Ubicación de prueba 2', 2),
-    ('103', NULL, 'Ubicación de prueba 3', 3),
-    ('104', '4', 'Ubicación de prueba 4', 4),
-    ('105', NULL, 'Ubicación de prueba 5', 5),
-    ('106', NULL, 'Ubicación de prueba 6', 6),
-    ('107', '7', 'Ubicación de prueba 7', 7),
-    ('108', NULL, 'Ubicación de prueba 8', 8),
-    ('109', NULL, 'Ubicación de prueba 9', 9),
-    ('110', '10', 'Ubicación de prueba 10', 10),
-    ('111', NULL, 'Ubicación de prueba 11', 11),
-    ('112', NULL, 'Ubicación de prueba 12', 12),
-    ('113', '13', 'Ubicación de prueba 13', 13),
-    ('114', NULL, 'Ubicación de prueba 14', 14),
-    ('115', NULL, 'Ubicación de prueba 15', 15),
-    ('116', '16', 'Ubicación de prueba 16', 16),
-    ('117', NULL, 'Ubicación de prueba 17', 17),
-    ('118', NULL, 'Ubicación de prueba 18', 18),
-    ('119', '19', 'Ubicación de prueba 19', 19),
-    ('120', NULL, 'Ubicación de prueba 20', 20);
+    ('14', NULL, 'Frente a la plaza principal', 1),
+    ('27', '2', 'A un costado del parque vecinal', 2),
+    ('105', NULL, 'Cerca de la escuela primaria', 3),
+    ('18', 'A', 'A dos cuadras del mercado municipal', 4),
+    ('220', NULL, 'Frente a una zona de viviendas', 5),
+    ('36', '3', 'Junto a la parada de transporte', 6),
+    ('71', NULL, 'Cerca de la capilla del barrio', 7),
+    ('9', NULL, 'En la esquina junto a una tienda', 8),
+    ('143', '5', 'Frente al parque de la colonia', 9),
+    ('52', NULL, 'A una cuadra del centro comunitario', 10),
+    ('88', NULL, 'Junto al acceso del fraccionamiento', 11),
+    ('16', '4', 'Cerca de la cancha deportiva', 12),
+    ('301', NULL, 'Frente al acceso principal del conjunto', 13),
+    ('44', NULL, 'A un costado de la farmacia', 14),
+    ('129', 'B', 'Cerca de la avenida principal', 15),
+    ('23', NULL, 'Frente al centro de salud', 16),
+    ('67', '1', 'Junto al área verde de la colonia', 17),
+    ('190', NULL, 'A una cuadra de la parada de autobús', 18),
+    ('31', NULL, 'Cerca de la entrada del fraccionamiento', 19),
+    ('76', '2', 'Frente a la cancha de usos múltiples', 20);
 
 -- Clientes
 INSERT INTO Clientes (nombre, apellidoP, apellidoM, correo, telefono) VALUES
@@ -182,28 +182,52 @@ INSERT INTO Clientes (nombre, apellidoP, apellidoM, correo, telefono) VALUES
     ('Lucía', 'Romero', 'Pérez', 'cliente19@correo.com', '4420000019'),
     ('Fernando', 'Navarro', 'Rodríguez', 'cliente20@correo.com', '4420000020');
 
+-- Tipos de propiedad
+INSERT INTO Tipos_propiedad (tipo) VALUES
+    ('Casa habitación'),
+    ('Departamento'),
+    ('Condominio residencial'),
+    ('Casa en fraccionamiento'),
+    ('Vivienda dúplex'),
+    ('Vivienda multifamiliar'),
+    ('Local comercial'),
+    ('Oficina'),
+    ('Bodega'),
+    ('Taller'),
+    ('Restaurante'),
+    ('Hotel'),
+    ('Clínica'),
+    ('Escuela'),
+    ('Edificio residencial'),
+    ('Edificio comercial'),
+    ('Nave industrial'),
+    ('Terreno habitacional'),
+    ('Terreno comercial'),
+    ('Uso mixto');
+
+
 -- Propiedades
-INSERT INTO Propiedades (id_ubicacion) VALUES
-    (1),
-    (2),
-    (3),
-    (4),
-    (5),
-    (6),
-    (7),
-    (8),
-    (9),
-    (10),
-    (11),
-    (12),
-    (13),
-    (14),
-    (15),
-    (16),
-    (17),
-    (18),
-    (19),
-    (20);
+INSERT INTO Propiedades (id_ubicacion, id_tipo_propiedad, descripcion) VALUES
+    (1, 1, 'Vivienda familiar de una planta.'),
+    (2, 2, 'Departamento dentro de un edificio habitacional.'),
+    (3, 3, 'Vivienda ubicada en un condominio residencial.'),
+    (4, 4, 'Casa ubicada dentro de un fraccionamiento.'),
+    (5, 5, 'Vivienda de dos niveles con acceso independiente.'),
+    (6, 6, 'Inmueble habitacional con varias viviendas.'),
+    (7, 7, 'Local destinado a la venta de productos.'),
+    (8, 8, 'Espacio utilizado para actividades administrativas.'),
+    (9, 9, 'Inmueble destinado al almacenamiento de materiales.'),
+    (10, 10, 'Espacio equipado para realizar trabajos de reparación.'),
+    (11, 11, 'Local acondicionado para preparar y servir alimentos.'),
+    (12, 12, 'Inmueble destinado al hospedaje de visitantes.'),
+    (13, 13, 'Espacio destinado a servicios de atención médica.'),
+    (14, 14, 'Inmueble utilizado para actividades educativas.'),
+    (15, 15, 'Edificio destinado principalmente a viviendas.'),
+    (16, 16, 'Edificio destinado a comercios y servicios.'),
+    (17, 17, 'Inmueble destinado a actividades industriales.'),
+    (18, 18, 'Terreno destinado a uso habitacional.'),
+    (19, 19, 'Terreno destinado a actividades comerciales.'),
+    (20, 20, 'Inmueble que combina uso habitacional y comercial.');
 
 -- Servicios
 INSERT INTO Servicios (id_cliente, id_propiedad) VALUES
@@ -275,27 +299,27 @@ INSERT INTO Estados_activos (estado) VALUES
     ('Sin comunicación');
 
 --  Activos
-INSERT INTO Activos (id_elemento, id_estado_activo) VALUES
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (5, 5),
-    (6, 6),
-    (7, 7),
-    (8, 8),
-    (9, 9),
-    (10, 10),
-    (11, 11),
-    (12, 12),
-    (13, 13),
-    (14, 14),
-    (15, 15),
-    (16, 16),
-    (17, 17),
-    (18, 18),
-    (19, 19),
-    (20, 20);
+INSERT INTO Activos (id_elemento, id_estado_activo, no_serie, modelo) VALUES
+    (1, 1, 'MED-QR-0001', 'AquaMeter AM-100'),
+    (2, 2, 'MED-QR-0002', 'AquaMeter AM-200'),
+    (3, 3, 'MED-QR-0003', 'HidroMed HM-15'),
+    (4, 4, 'MED-QR-0004', 'HidroMed HM-20'),
+    (5, 5, 'MED-QR-0005', 'FlowDigital FD-50'),
+    (6, 6, 'MED-QR-0006', 'UltraFlow UF-10'),
+    (7, 7, 'MED-QR-0007', 'AquaFlow AF-30'),
+    (8, 8, 'MED-QR-0008', 'FlowDigital FD-75'),
+    (9, 9, 'VAL-QR-0009', 'ValveControl VC-100'),
+    (10, 10, 'VAL-QR-0010', 'ValveControl VC-200'),
+    (11, 11, 'VAL-QR-0011', 'PressureValve PV-50'),
+    (12, 12, 'VAL-QR-0012', 'GateValve GV-80'),
+    (13, 13, 'TAN-QR-0013', 'AquaTank AT-5000'),
+    (14, 14, 'TAN-QR-0014', 'AquaTank AT-8000'),
+    (15, 15, 'BOM-QR-0015', 'HydroPump HP-100'),
+    (16, 16, 'BOM-QR-0016', 'HydroPump HP-200'),
+    (17, 17, 'TUB-QR-0017', 'AquaPipe AP-300'),
+    (18, 18, 'TUB-QR-0018', 'AquaPipe AP-500'),
+    (19, 19, 'HID-QR-0019', 'HydrantPro HP-40'),
+    (20, 20, 'SEN-QR-0020', 'FlowSensor FS-25');
 
 -- Elementos_infraestructura
 INSERT INTO Elementos_infraestructura (capacidad, id_ubicacion, id_activo) VALUES
@@ -391,49 +415,51 @@ INSERT INTO Recibos (fecha_emision, periodo_inicio, periodo_fin, lectura_anterio
 
 -- Tipos_zona
 INSERT INTO Tipos_zona (tipo) VALUES
-    ('Residencial'),
-    ('Comercial'),
-    ('Industrial'),
-    ('Rural'),
-    ('Urbana'),
-    ('Periurbana'),
-    ('Agrícola'),
-    ('Hospitalaria'),
-    ('Escolar'),
-    ('Turística'),
-    ('Mixta'),
-    ('Centro histórico'),
-    ('Alta densidad'),
-    ('Baja densidad'),
-    ('Conurbada'),
-    ('De expansión'),
-    ('De conservación'),
-    ('De abastecimiento norte'),
-    ('De abastecimiento sur'),
-    ('De abastecimiento central');
+    ('Pozo profundo'),
+    ('Pozo somero'),
+    ('Pozo de reserva'),
+    ('Depósito superficial'),
+    ('Depósito subterráneo'),
+    ('Tanque elevado'),
+    ('Tanque de almacenamiento'),
+    ('Planta potabilizadora'),
+    ('Planta de tratamiento'),
+    ('Manantial'),
+    ('Presa'),
+    ('Río'),
+    ('Captación pluvial'),
+    ('Galería filtrante'),
+    ('Noria'),
+    ('Acueducto'),
+    ('Canal de abastecimiento'),
+    ('Fuente subterránea'),
+    ('Fuente superficial'),
+    ('Interconexión con otra red');
+
 
 -- Zonas_abastecimiento
 INSERT INTO Zonas_abastecimiento (nombre, id_tipo_zona, id_ubicacion) VALUES
-    ('Zona de abastecimiento 01', 1, 1),
-    ('Zona de abastecimiento 02', 2, 2),
-    ('Zona de abastecimiento 03', 3, 3),
-    ('Zona de abastecimiento 04', 4, 4),
-    ('Zona de abastecimiento 05', 5, 5),
-    ('Zona de abastecimiento 06', 6, 6),
-    ('Zona de abastecimiento 07', 7, 7),
-    ('Zona de abastecimiento 08', 8, 8),
-    ('Zona de abastecimiento 09', 9, 9),
-    ('Zona de abastecimiento 10', 10, 10),
-    ('Zona de abastecimiento 11', 11, 11),
-    ('Zona de abastecimiento 12', 12, 12),
-    ('Zona de abastecimiento 13', 13, 13),
-    ('Zona de abastecimiento 14', 14, 14),
-    ('Zona de abastecimiento 15', 15, 15),
-    ('Zona de abastecimiento 16', 16, 16),
-    ('Zona de abastecimiento 17', 17, 17),
-    ('Zona de abastecimiento 18', 18, 18),
-    ('Zona de abastecimiento 19', 19, 19),
-    ('Zona de abastecimiento 20', 20, 20);
+    ('Zona Centro de Santiago de Querétaro', 1, 1),
+    ('Zona Las Flores de El Pueblito', 2, 2),
+    ('Zona San Miguel de La Cañada', 8, 3),
+    ('Zona La Esperanza de San Juan del Río', 4, 4),
+    ('Zona Los Pinos de Celaya', 5, 5),
+    ('Zona El Mirador de León', 6, 6),
+    ('Zona Santa María de Pachuca', 10, 7),
+    ('Zona La Loma de San Luis Potosí', 7, 8),
+    ('Zona Vista Alegre de Morelia', 11, 9),
+    ('Zona Los Olivos de Guadalajara', 9, 10),
+    ('Zona La Pradera de Toluca', 12, 11),
+    ('Zona San José de Puebla', 13, 12),
+    ('Zona El Refugio de Xalapa', 14, 13),
+    ('Zona Las Palmas de Cuernavaca', 15, 14),
+    ('Zona Jardines del Valle de Tlaxcala', 16, 15),
+    ('Zona La Cañada de Aguascalientes', 17, 16),
+    ('Zona Lomas Verdes de Zacatecas', 18, 17),
+    ('Zona Valle Dorado de Monterrey', 19, 18),
+    ('Zona La Guadalupana de Saltillo', 20, 19),
+    ('Zona Real del Bosque de Chihuahua', 3, 20);
+
 
 -- Tipos_incidencias
 INSERT INTO Tipos_incidencias (tipo, descripcion) VALUES
@@ -459,7 +485,7 @@ INSERT INTO Tipos_incidencias (tipo, descripcion) VALUES
     ('Reporte preventivo', 'Reporte relacionado con reporte preventivo.');
 
 -- Incidencias
-INSERT INTO Incidencias (id_tipo, descripcion, fecha, id_cliente) VALUES
+INSERT INTO Incidencias (id_tipo, descripcion, fecha, id_servicio) VALUES
     (1, 'Fuga en tubería reportada por el cliente.', '2026-01-02', 1),
     (2, 'Falta de suministro reportada por el cliente.', '2026-01-03', 2),
     (3, 'Mala calidad reportada por el cliente.', '2026-01-04', 3),
@@ -597,24 +623,24 @@ INSERT INTO Estados_valvulas (estado) VALUES
     ('Estado desconocido');
 
 -- Eventos_valvulas
-INSERT INTO Eventos_valvulas (id_valvula, fecha, id_estado_actual, id_estado_anterior, motivo) VALUES
-    (1, '2026-03-01 19:00:00', 2, 1, 'Evento operativo de prueba 01'),
-    (2, '2026-03-02 07:00:00', 3, 2, 'Evento operativo de prueba 02'),
-    (3, '2026-03-02 19:00:00', 4, 3, 'Evento operativo de prueba 03'),
-    (4, '2026-03-03 07:00:00', 5, 4, 'Evento operativo de prueba 04'),
-    (5, '2026-03-03 19:00:00', 6, 5, 'Evento operativo de prueba 05'),
-    (6, '2026-03-04 07:00:00', 7, 6, 'Evento operativo de prueba 06'),
-    (7, '2026-03-04 19:00:00', 8, 7, 'Evento operativo de prueba 07'),
-    (8, '2026-03-05 07:00:00', 9, 8, 'Evento operativo de prueba 08'),
-    (9, '2026-03-05 19:00:00', 10, 9, 'Evento operativo de prueba 09'),
-    (10, '2026-03-06 07:00:00', 11, 10, 'Evento operativo de prueba 10'),
-    (11, '2026-03-06 19:00:00', 12, 11, 'Evento operativo de prueba 11'),
-    (12, '2026-03-07 07:00:00', 13, 12, 'Evento operativo de prueba 12'),
-    (13, '2026-03-07 19:00:00', 14, 13, 'Evento operativo de prueba 13'),
-    (14, '2026-03-08 07:00:00', 15, 14, 'Evento operativo de prueba 14'),
-    (15, '2026-03-08 19:00:00', 16, 15, 'Evento operativo de prueba 15'),
-    (16, '2026-03-09 07:00:00', 17, 16, 'Evento operativo de prueba 16'),
-    (17, '2026-03-09 19:00:00', 18, 17, 'Evento operativo de prueba 17'),
-    (18, '2026-03-10 07:00:00', 19, 18, 'Evento operativo de prueba 18'),
-    (19, '2026-03-10 19:00:00', 20, 19, 'Evento operativo de prueba 19'),
-    (20, '2026-03-11 07:00:00', 1, 20, 'Evento operativo de prueba 20');
+INSERT INTO Eventos_valvulas (id_valvula, fecha, id_estado_actual, id_estado_anterior) VALUES
+    (1, '2026-03-01 19:00:00', 2, 1),
+    (2, '2026-03-02 07:00:00', 3, 2),
+    (3, '2026-03-02 19:00:00', 4, 3),
+    (4, '2026-03-03 07:00:00', 5, 4),
+    (5, '2026-03-03 19:00:00', 6, 5),
+    (6, '2026-03-04 07:00:00', 7, 6),
+    (7, '2026-03-04 19:00:00', 8, 7),
+    (8, '2026-03-05 07:00:00', 9, 8),
+    (9, '2026-03-05 19:00:00', 10, 9),
+    (10, '2026-03-06 07:00:00', 11, 10),
+    (11, '2026-03-06 19:00:00', 12, 11),
+    (12, '2026-03-07 07:00:00', 13, 12),
+    (13, '2026-03-07 19:00:00', 14, 13),
+    (14, '2026-03-08 07:00:00', 15, 14),
+    (15, '2026-03-08 19:00:00', 16, 15),
+    (16, '2026-03-09 07:00:00', 17, 16),
+    (17, '2026-03-09 19:00:00', 18, 17),
+    (18, '2026-03-10 07:00:00', 19, 18),
+    (19, '2026-03-10 19:00:00', 20, 19),
+    (20, '2026-03-11 07:00:00', 1, 20);

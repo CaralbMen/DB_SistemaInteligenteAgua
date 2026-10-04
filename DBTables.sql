@@ -73,12 +73,22 @@ CREATE TABLE Clientes (
     telefono VARCHAR(15)
 );
 
+-- 28. TABLA TIPOS DE PROPIEDADES
+CREATE TABLE Tipos_propiedad (
+    id SERIAL PRIMARY KEY,
+    tipo VARCHAR(30) NOT NULL
+);
+
 -- 9. TABLA PROPIEDADES
 CREATE TABLE Propiedades (
     id SERIAL PRIMARY KEY,
     id_ubicacion INT NOT NULL,
+    id_tipo_propiedad INT NOT NULL,
+    descripcion VARCHAR(150),
     CONSTRAINT fk_propiedad_ubicacion
-        FOREIGN KEY (id_ubicacion) REFERENCES Ubicaciones(id)
+        FOREIGN KEY (id_ubicacion) REFERENCES Ubicaciones(id),
+    CONSTRAINT fk_propiedad_tipo
+        FOREIGN KEY (id_tipo_propiedad) REFERENCES Tipos_propiedad(id)
 );
 
 -- 10. TABLA SERVICIOS
@@ -109,6 +119,8 @@ CREATE TABLE Activos (
     id SERIAL PRIMARY KEY,
     id_elemento INT NOT NULL,
     id_estado_activo INT NOT NULL,
+    no_serie VARCHAR(50) NOT NULL UNIQUE,
+    modelo VARCHAR(50) NOT NULL,
     CONSTRAINT fk_activo_elemento
         FOREIGN KEY (id_elemento) REFERENCES Elementos(id),
     CONSTRAINT fk_activo_estado_activo
@@ -198,11 +210,11 @@ CREATE TABLE Incidencias (
     id_tipo INT,
     descripcion TEXT,
     fecha DATE NOT NULL,
-    id_cliente INT NOT NULL,
-    CONSTRAINT fk_incidencia_cliente
-        FOREIGN KEY (id_cliente) REFERENCES Clientes(id),
-    CONSTRAINT fk_tipo_incidencia
-        FOREIGN KEY (id_tipo) REFERENCES Tipos_incidencias(id)
+    id_servicio INT NOT NULL,
+    CONSTRAINT fk_incidencia_tipo
+        FOREIGN KEY (id_tipo) REFERENCES Tipos_incidencias(id),
+    CONSTRAINT fk_incidencia_servicio
+        FOREIGN KEY (id_servicio) REFERENCES Servicios(id)
 );
 
 -- 22. TABLA ESTADOS DE ORDENES
@@ -261,7 +273,6 @@ CREATE TABLE Eventos_valvulas (
     fecha TIMESTAMP NOT NULL,
     id_estado_actual INT,
     id_estado_anterior INT,
-    motivo VARCHAR(100),
     CONSTRAINT fk_evento_valvula
         FOREIGN KEY (id_valvula) REFERENCES Activos(id),
     CONSTRAINT fk_status_actual_valvula
