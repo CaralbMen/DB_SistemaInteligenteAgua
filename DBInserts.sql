@@ -159,8 +159,8 @@ INSERT INTO Ubicaciones (no_exterior, no_interior, referencia, id_calle) VALUES
     ('31', NULL, 'Cerca de la entrada del fraccionamiento', 19),
     ('76', '2', 'Frente a la cancha de usos múltiples', 20);
 
--- Clientes
-INSERT INTO Clientes (nombre, apellidoP, apellidoM, correo, telefono) VALUES
+-- Personas: primero clientes para conservar las referencias de Propiedades
+INSERT INTO Personas (nombre, apellidoP, apellidoM, correo, telefono) VALUES
     ('Ana', 'García', 'Sánchez', 'cliente01@correo.com', '4420000001'),
     ('Luis', 'Hernández', 'Ramírez', 'cliente02@correo.com', '4420000002'),
     ('María', 'López', 'Cruz', 'cliente03@correo.com', '4420000003'),
@@ -180,7 +180,27 @@ INSERT INTO Clientes (nombre, apellidoP, apellidoM, correo, telefono) VALUES
     ('Paola', 'Vargas', 'Martínez', 'cliente17@correo.com', '4420000017'),
     ('Emilio', 'Castillo', 'González', 'cliente18@correo.com', '4420000018'),
     ('Lucía', 'Romero', 'Pérez', 'cliente19@correo.com', '4420000019'),
-    ('Fernando', 'Navarro', 'Rodríguez', 'cliente20@correo.com', '4420000020');
+    ('Fernando', 'Navarro', 'Rodríguez', 'cliente20@correo.com', '4420000020'),
+    ('Ana', 'González', 'Díaz', 'empleado01@agua.com', NULL),
+    ('Luis', 'Pérez', 'Reyes', 'empleado02@agua.com', NULL),
+    ('María', 'Rodríguez', 'Morales', 'empleado03@agua.com', NULL),
+    ('Carlos', 'Sánchez', 'Ortiz', 'empleado04@agua.com', NULL),
+    ('Sofía', 'Ramírez', 'Vargas', 'empleado05@agua.com', NULL),
+    ('José', 'Cruz', 'Castillo', 'empleado06@agua.com', NULL),
+    ('Valeria', 'Flores', 'Romero', 'empleado07@agua.com', NULL),
+    ('Miguel', 'Gómez', 'Navarro', 'empleado08@agua.com', NULL),
+    ('Fernanda', 'Díaz', 'García', 'empleado09@agua.com', NULL),
+    ('Diego', 'Reyes', 'Hernández', 'empleado10@agua.com', NULL),
+    ('Daniela', 'Morales', 'López', 'empleado11@agua.com', NULL),
+    ('Jorge', 'Ortiz', 'Martínez', 'empleado12@agua.com', NULL),
+    ('Camila', 'Vargas', 'González', 'empleado13@agua.com', NULL),
+    ('Andrés', 'Castillo', 'Pérez', 'empleado14@agua.com', NULL),
+    ('Gabriela', 'Romero', 'Rodríguez', 'empleado15@agua.com', NULL),
+    ('Ricardo', 'Navarro', 'Sánchez', 'empleado16@agua.com', NULL),
+    ('Paola', 'García', 'Ramírez', 'empleado17@agua.com', NULL),
+    ('Emilio', 'Hernández', 'Cruz', 'empleado18@agua.com', NULL),
+    ('Lucía', 'López', 'Flores', 'empleado19@agua.com', NULL),
+    ('Fernando', 'Martínez', 'Gómez', 'empleado20@agua.com', NULL);
 
 -- Tipos de propiedad
 INSERT INTO Tipos_propiedad (tipo) VALUES
@@ -691,28 +711,28 @@ INSERT INTO Ordenes_trabajo (id_incidencia, id_cuadrilla, id_estado, fecha_inici
     (19, 19, 19, '2026-02-19', '2026-02-20'),
     (20, 20, 20, '2026-02-20', '2026-02-21');
 
--- Empleados
-INSERT INTO Empleados (nombre, apaterno, amaterno, correo, id_domicilio, id_cuadrilla) VALUES
-    ('Ana', 'González', 'Díaz', 'empleado01@agua.com', 1, 1),
-    ('Luis', 'Pérez', 'Reyes', 'empleado02@agua.com', 2, 2),
-    ('María', 'Rodríguez', 'Morales', 'empleado03@agua.com', 3, 3),
-    ('Carlos', 'Sánchez', 'Ortiz', 'empleado04@agua.com', 4, 4),
-    ('Sofía', 'Ramírez', 'Vargas', 'empleado05@agua.com', 5, 5),
-    ('José', 'Cruz', 'Castillo', 'empleado06@agua.com', 6, 6),
-    ('Valeria', 'Flores', 'Romero', 'empleado07@agua.com', 7, 7),
-    ('Miguel', 'Gómez', 'Navarro', 'empleado08@agua.com', 8, 8),
-    ('Fernanda', 'Díaz', 'García', 'empleado09@agua.com', 9, 9),
-    ('Diego', 'Reyes', 'Hernández', 'empleado10@agua.com', 10, 10),
-    ('Daniela', 'Morales', 'López', 'empleado11@agua.com', 11, 11),
-    ('Jorge', 'Ortiz', 'Martínez', 'empleado12@agua.com', 12, 12),
-    ('Camila', 'Vargas', 'González', 'empleado13@agua.com', 13, 13),
-    ('Andrés', 'Castillo', 'Pérez', 'empleado14@agua.com', 14, 14),
-    ('Gabriela', 'Romero', 'Rodríguez', 'empleado15@agua.com', 15, 15),
-    ('Ricardo', 'Navarro', 'Sánchez', 'empleado16@agua.com', 16, 16),
-    ('Paola', 'García', 'Ramírez', 'empleado17@agua.com', 17, 17),
-    ('Emilio', 'Hernández', 'Cruz', 'empleado18@agua.com', 18, 18),
-    ('Lucía', 'López', 'Flores', 'empleado19@agua.com', 19, 19),
-    ('Fernando', 'Martínez', 'Gómez', 'empleado20@agua.com', 20, 20);
+-- Empleados: los datos personales y el correo están en Personas
+INSERT INTO Empleados (id_persona, id_cuadrilla, id_domicilio, no_empleado) VALUES
+    (21, 1, 1, 'EMP-0001'),
+    (22, 2, 2, 'EMP-0002'),
+    (23, 3, 3, 'EMP-0003'),
+    (24, 4, 4, 'EMP-0004'),
+    (25, 5, 5, 'EMP-0005'),
+    (26, 6, 6, 'EMP-0006'),
+    (27, 7, 7, 'EMP-0007'),
+    (28, 8, 8, 'EMP-0008'),
+    (29, 9, 9, 'EMP-0009'),
+    (30, 10, 10, 'EMP-0010'),
+    (31, 11, 11, 'EMP-0011'),
+    (32, 12, 12, 'EMP-0012'),
+    (33, 13, 13, 'EMP-0013'),
+    (34, 14, 14, 'EMP-0014'),
+    (35, 15, 15, 'EMP-0015'),
+    (36, 16, 16, 'EMP-0016'),
+    (37, 17, 17, 'EMP-0017'),
+    (38, 18, 18, 'EMP-0018'),
+    (39, 19, 19, 'EMP-0019'),
+    (40, 20, 20, 'EMP-0020');
 
 -- Estados_valvulas
 INSERT INTO Estados_valvulas (estado) VALUES

@@ -123,7 +123,7 @@
 
 -- INICIAN TABLAS DE USUARIOS, PROPIEDADES Y SERVICIOS
     -- 16.TABLA CLIENTES
-    CREATE TABLE Clientes(
+    CREATE TABLE Personas(
         id SERIAL PRIMARY KEY,
         nombre VARCHAR(50) NOT NULL,
         apellidoP VARCHAR(50) NOT NULL,
@@ -142,7 +142,7 @@
         id_cliente INT NOT NULL,
         id_ubicacion INT NOT NULL,
         id_tipo_propiedad int not null,
-        CONSTRAINT fk_propiedad_cliente FOREIGN KEY (id_cliente) REFERENCES Clientes(id),
+        CONSTRAINT fk_propiedad_cliente FOREIGN KEY (id_cliente) REFERENCES Personas(id),
         CONSTRAINT fk_propiedad_ubicacion FOREIGN KEY (id_ubicacion) REFERENCES Ubicaciones(id)
     );
     -- 19. TABLA ESTADOS_SERVICIOS
@@ -229,15 +229,13 @@
     );
     -- 28. TABLA EMPLEADOS
     create table empleados(
-        id serial primary key,
-        nombre varchar(20),
-        apaterno varchar(20),
-        amaterno varchar(20),
-        correo varchar(50),
-        id_domicilio int,
+        id_persona int primary key,
         id_cuadrilla int,
-        constraint fk_ubicacion_empleado foreign key(id_domicilio) references Ubicaciones(id),
-        constraint fk_cuadrilla_empleado foreign key(id_cuadrilla) references cuadrillas(id)
+        id_domicilio int,
+        no_empleado varchar(10) unique,
+        constraint fk_empleado_persona foreign key(id_persona) references Personas(id),
+        constraint fk_cuadrilla_empleado foreign key(id_cuadrilla) references cuadrillas(id),
+        constraint fk_ubicacion_empleado foreign key(id_domicilio) references Ubicaciones(id)
     );
     -- 29. TABLA ESTADOS_ORDENES
     create table estados_ordenes(
