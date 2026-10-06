@@ -8,7 +8,7 @@ SELECT
     es.estado AS estado_servicio
 FROM Servicios s
 INNER JOIN Propiedades p ON s.id_propiedad = p.id
-INNER JOIN Clientes c ON p.id_cliente = c.id
+INNER JOIN Personas c ON p.id_cliente = c.id
 INNER JOIN estados_servicios es ON s.id_estado = es.id
 WHERE es.estado = 'Activo';
 
@@ -20,7 +20,7 @@ SELECT
     c.nombre || ' ' || c.apellidoP || ' ' || c.apellidoM AS cliente,
     p.id AS id_propiedad,
     tp.tipo AS tipo_propiedad
-FROM Clientes c
+FROM Personas c
 INNER JOIN Propiedades p ON c.id = p.id_cliente
 INNER JOIN Tipos_propiedad tp ON p.id_tipo_propiedad = tp.id;
 
@@ -34,7 +34,7 @@ SELECT
     l.valor_capturado AS consumo
 FROM Servicios s
 INNER JOIN Propiedades p ON s.id_propiedad = p.id
-INNER JOIN Clientes c ON p.id_cliente = c.id
+INNER JOIN Personas c ON p.id_cliente = c.id
 INNER JOIN lecturas_consumo lc ON s.id = lc.id_servicio
 INNER JOIN lecturas l ON lc.id_lectura = l.id
 ORDER BY l.fecha_hora DESC;
@@ -48,7 +48,7 @@ SELECT
     SUM(l.valor_capturado) AS consumo_total
 FROM Servicios s
 INNER JOIN Propiedades p ON s.id_propiedad = p.id
-INNER JOIN Clientes c ON p.id_cliente = c.id
+INNER JOIN Personas c ON p.id_cliente = c.id
 INNER JOIN lecturas_consumo lc ON s.id = lc.id_servicio
 INNER JOIN lecturas l ON lc.id_lectura = l.id
 GROUP BY s.id, c.nombre, c.apellidoP, c.apellidoM
@@ -104,16 +104,19 @@ ORDER BY capacidad_total DESC;
 
 
 -- 9. Mostrar los sensores y qué están midiendo
+select * from Elementos_infraestructura;
+select * from activos;
 
 SELECT 
     s.id_activo AS id_sensor,
     am.tipo AS tipo_medicion,
-    ei.id_activo AS infraestructura
+	a.no_serie AS activo
 FROM sensores s
 INNER JOIN aspectos_medicion am 
     ON s.id_aspecto_medicion = am.id
 INNER JOIN Elementos_infraestructura ei
-    ON s.id_elemento_infraestructura = ei.id_activo;
+    ON s.id_elemento_infraestructura = ei.id_activo
+inner join activos a on a.id = ei.id_activo;
 
 
 -- 10. Mostrar las lecturas de los sensores
@@ -152,7 +155,6 @@ ORDER BY am.tipo;
 
 
 -- 12. Mostrar todas las incidencias y su tipo
-
 SELECT 
     i.id,
     ti.tipo AS tipo_incidencia,
@@ -177,7 +179,6 @@ ORDER BY cantidad_incidencias DESC;
 
 
 -- 14. Mostrar las órdenes de trabajo y su estado
-
 SELECT 
     ot.id AS id_orden,
     ot.fecha_inicio,
@@ -203,5 +204,4 @@ LEFT JOIN Ordenes_trabajo ot
     ON c.id = ot.id_cuadrilla
 GROUP BY c.id, c.nombre
 ORDER BY total_ordenes DESC;
-
 

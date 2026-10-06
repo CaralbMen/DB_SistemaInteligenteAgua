@@ -159,6 +159,52 @@ INSERT INTO Ubicaciones (no_exterior, no_interior, referencia, id_calle) VALUES
     ('31', NULL, 'Cerca de la entrada del fraccionamiento', 19),
     ('76', '2', 'Frente a la cancha de usos múltiples', 20);
 
+-- Tipos_zona
+INSERT INTO Tipos_zona (tipo) VALUES
+    ('Pozo profundo'),
+    ('Pozo somero'),
+    ('Pozo de reserva'),
+    ('Depósito superficial'),
+    ('Depósito subterráneo'),
+    ('Tanque elevado'),
+    ('Tanque de almacenamiento'),
+    ('Planta potabilizadora'),
+    ('Planta de tratamiento'),
+    ('Manantial'),
+    ('Presa'),
+    ('Río'),
+    ('Captación pluvial'),
+    ('Galería filtrante'),
+    ('Noria'),
+    ('Acueducto'),
+    ('Canal de abastecimiento'),
+    ('Fuente subterránea'),
+    ('Fuente superficial'),
+    ('Interconexión con otra red');
+
+-- Zonas_abastecimiento
+INSERT INTO Zonas_abastecimiento (nombre, id_tipo_zona, id_ubicacion) VALUES
+    ('Zona Centro de Santiago de Querétaro', 1, 1),
+    ('Zona Las Flores de El Pueblito', 2, 2),
+    ('Zona San Miguel de La Cañada', 8, 3),
+    ('Zona La Esperanza de San Juan del Río', 4, 4),
+    ('Zona Los Pinos de Celaya', 5, 5),
+    ('Zona El Mirador de León', 6, 6),
+    ('Zona Santa María de Pachuca', 10, 7),
+    ('Zona La Loma de San Luis Potosí', 7, 8),
+    ('Zona Vista Alegre de Morelia', 11, 9),
+    ('Zona Los Olivos de Guadalajara', 9, 10),
+    ('Zona La Pradera de Toluca', 12, 11),
+    ('Zona San José de Puebla', 13, 12),
+    ('Zona El Refugio de Xalapa', 14, 13),
+    ('Zona Las Palmas de Cuernavaca', 15, 14),
+    ('Zona Jardines del Valle de Tlaxcala', 16, 15),
+    ('Zona La Cañada de Aguascalientes', 17, 16),
+    ('Zona Lomas Verdes de Zacatecas', 18, 17),
+    ('Zona Valle Dorado de Monterrey', 19, 18),
+    ('Zona La Guadalupana de Saltillo', 20, 19),
+    ('Zona Real del Bosque de Chihuahua', 3, 20);
+
 -- Personas: primero clientes para conservar las referencias de Propiedades
 INSERT INTO Personas (nombre, apellidoP, apellidoM, correo, telefono) VALUES
     ('Ana', 'García', 'Sánchez', 'cliente01@correo.com', '4420000001'),
@@ -319,27 +365,28 @@ INSERT INTO Activos (id_categoria, id_estado_activo, no_serie) VALUES
     (20, 1, 'SEN-QR-0020');
 
 -- Elementos_infraestructura
-INSERT INTO Elementos_infraestructura (capacidad, id_ubicacion, id_activo) VALUES
-    (1250, 1, 1),
-    (1500, 2, 2),
-    (1750, 3, 3),
-    (2000, 4, 4),
-    (2250, 5, 5),
-    (2500, 6, 6),
-    (2750, 7, 7),
-    (3000, 8, 8),
-    (3250, 9, 9),
-    (3500, 10, 10),
-    (3750, 11, 11),
-    (4000, 12, 12),
-    (4250, 13, 13),
-    (4500, 14, 14),
-    (4750, 15, 15),
-    (5000, 16, 16),
-    (5250, 17, 17),
-    (5500, 18, 18),
-    (5750, 19, 19),
-    (6000, 20, 20);
+INSERT INTO Elementos_infraestructura
+    (capacidad, id_ubicacion, id_zona_abastecimiento, id_activo, caracteristicas_operativas) VALUES
+    (1250, 1, 1, 1, '{"tipo_activo":"medidor_domestico","unidad_capacidad":"m3","unidad_medicion":"m3","estado_operativo":"operativo"}'::jsonb),
+    (1500, 2, 2, 2, '{"tipo_activo":"medidor_residencial","unidad_capacidad":"m3","unidad_medicion":"m3","estado_operativo":"operativo"}'::jsonb),
+    (1750, 3, 3, 3, '{"tipo_activo":"medidor_digital","unidad_capacidad":"m3","unidad_medicion":"m3","frecuencia_transmision_segundos":60,"estado_operativo":"operativo"}'::jsonb),
+    (2000, 4, 4, 4, '{"tipo_activo":"medidor_ultrasonico","unidad_capacidad":"m3","unidad_medicion":"m3","frecuencia_transmision_segundos":60,"estado_operativo":"operativo"}'::jsonb),
+    (2250, 5, 5, 5, '{"tipo_activo":"medidor_de_flujo","unidad_capacidad":"m3","unidad_medicion":"m3","estado_operativo":"operativo"}'::jsonb),
+    (2500, 6, 6, 6, '{"tipo_activo":"valvula_de_seccionamiento","unidad_capacidad":"L/s","material":"hierro_fundido","estado_operativo":"abierta"}'::jsonb),
+    (2750, 7, 7, 7, '{"tipo_activo":"valvula_de_control","unidad_capacidad":"L/s","material":"acero","modo_control":"automatico","estado_operativo":"operativa"}'::jsonb),
+    (3000, 8, 8, 8, '{"tipo_activo":"valvula_reguladora_de_presion","unidad_capacidad":"L/s","presion_objetivo_kpa":300,"estado_operativo":"operativa"}'::jsonb),
+    (3250, 9, 9, 9, '{"tipo_activo":"valvula_de_compuerta","unidad_capacidad":"L/s","material":"hierro_fundido","estado_operativo":"abierta"}'::jsonb),
+    (3500, 10, 10, 10, '{"tipo_activo":"tanque_elevado","unidad_capacidad":"L","nivel_operativo_porcentaje":80,"material":"concreto","estado_operativo":"operativo"}'::jsonb),
+    (3750, 11, 11, 11, '{"tipo_activo":"tanque_de_almacenamiento","unidad_capacidad":"L","nivel_operativo_porcentaje":75,"material":"acero","estado_operativo":"operativo"}'::jsonb),
+    (4000, 12, 12, 12, '{"tipo_activo":"bomba_de_distribucion","unidad_capacidad":"L/s","potencia_kw":15,"caudal_nominal_m3_h":40,"estado_operativo":"operativa"}'::jsonb),
+    (4250, 13, 13, 13, '{"tipo_activo":"estacion_de_bombeo","unidad_capacidad":"L/s","numero_bombas":3,"modo_operacion":"automatico","estado_operativo":"operativa"}'::jsonb),
+    (4500, 14, 14, 14, '{"tipo_activo":"tuberia_principal","unidad_capacidad":"L/s","material":"acero","diametro_mm":400,"estado_operativo":"operativa"}'::jsonb),
+    (4750, 15, 15, 15, '{"tipo_activo":"tuberia_secundaria","unidad_capacidad":"L/s","material":"PVC","diametro_mm":150,"estado_operativo":"operativa"}'::jsonb),
+    (5000, 16, 16, 16, '{"tipo_activo":"hidrante","unidad_capacidad":"L/s","presion_operativa_kpa":500,"diametro_salida_mm":100,"estado_operativo":"operativo"}'::jsonb),
+    (5250, 17, 17, 17, '{"tipo_activo":"sensor_de_caudal","variable_medida":"caudal","unidad_medida":"L/s","rango_minimo":0,"rango_maximo":100,"estado_operativo":"operativo"}'::jsonb),
+    (5500, 18, 18, 18, '{"tipo_activo":"sensor_de_presion","variable_medida":"presion","unidad_medida":"kPa","rango_minimo":0,"rango_maximo":1000,"estado_operativo":"operativo"}'::jsonb),
+    (5750, 19, 19, 19, '{"tipo_activo":"sensor_de_nivel","variable_medida":"nivel","unidad_medida":"m","rango_minimo":0,"rango_maximo":10,"estado_operativo":"operativo"}'::jsonb),
+    (6000, 20, 20, 20, '{"tipo_activo":"sensor_de_calidad_del_agua","variable_medida":"calidad_general","unidad_medida":"indice","rango_minimo":0,"rango_maximo":100,"estado_operativo":"operativo"}'::jsonb);
 
 -- Aspectos_medicion
 INSERT INTO aspectos_medicion (tipo) VALUES
@@ -432,53 +479,6 @@ INSERT INTO estados_servicios (estado) VALUES
     ('Con adeudo'),
     ('Regularizado'),
     ('Pendiente de cierre');
-
--- Tipos_zona
-INSERT INTO Tipos_zona (tipo) VALUES
-    ('Pozo profundo'),
-    ('Pozo somero'),
-    ('Pozo de reserva'),
-    ('Depósito superficial'),
-    ('Depósito subterráneo'),
-    ('Tanque elevado'),
-    ('Tanque de almacenamiento'),
-    ('Planta potabilizadora'),
-    ('Planta de tratamiento'),
-    ('Manantial'),
-    ('Presa'),
-    ('Río'),
-    ('Captación pluvial'),
-    ('Galería filtrante'),
-    ('Noria'),
-    ('Acueducto'),
-    ('Canal de abastecimiento'),
-    ('Fuente subterránea'),
-    ('Fuente superficial'),
-    ('Interconexión con otra red');
-
-
--- Zonas_abastecimiento
-INSERT INTO Zonas_abastecimiento (nombre, id_tipo_zona, id_ubicacion) VALUES
-    ('Zona Centro de Santiago de Querétaro', 1, 1),
-    ('Zona Las Flores de El Pueblito', 2, 2),
-    ('Zona San Miguel de La Cañada', 8, 3),
-    ('Zona La Esperanza de San Juan del Río', 4, 4),
-    ('Zona Los Pinos de Celaya', 5, 5),
-    ('Zona El Mirador de León', 6, 6),
-    ('Zona Santa María de Pachuca', 10, 7),
-    ('Zona La Loma de San Luis Potosí', 7, 8),
-    ('Zona Vista Alegre de Morelia', 11, 9),
-    ('Zona Los Olivos de Guadalajara', 9, 10),
-    ('Zona La Pradera de Toluca', 12, 11),
-    ('Zona San José de Puebla', 13, 12),
-    ('Zona El Refugio de Xalapa', 14, 13),
-    ('Zona Las Palmas de Cuernavaca', 15, 14),
-    ('Zona Jardines del Valle de Tlaxcala', 16, 15),
-    ('Zona La Cañada de Aguascalientes', 17, 16),
-    ('Zona Lomas Verdes de Zacatecas', 18, 17),
-    ('Zona Valle Dorado de Monterrey', 19, 18),
-    ('Zona La Guadalupana de Saltillo', 20, 19),
-    ('Zona Real del Bosque de Chihuahua', 3, 20);
 
 -- Servicios
 INSERT INTO Servicios (id_propiedad, id_medidor, id_estado, id_zona_abastecimiento) VALUES
