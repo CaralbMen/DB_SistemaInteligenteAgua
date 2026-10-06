@@ -166,7 +166,7 @@ INNER JOIN tipos_incidencias ti
 ORDER BY i.fecha_hora DESC;
 
 
--- 13. Contar cuántas incidencias existen por tipo
+-- 13. Contar cuántas incidencias existen por tipo --
 
 SELECT 
     ti.tipo AS tipo_incidencia,
