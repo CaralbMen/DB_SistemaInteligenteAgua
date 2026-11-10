@@ -160,18 +160,7 @@ create table lecturas (
     id_sensor int not null,
     fecha_hora timestamptz not null,
     datos jsonb not null,
-    constraint fk_lectura_sensor foreign key (id_sensor) references sensores(id_activo),
-    constraint uq_lectura_instante unique (id_sensor, fecha_hora),
-    constraint chk_documento check (
-        jsonb_typeof(datos) = 'object'
-        and datos ?& array['version', 'tipo_lectura', 'lectura', 'unidad', 'bateria_pct']
-        and datos->>'version' = '1'
-        and jsonb_typeof(datos->'tipo_lectura') = 'string'
-        and jsonb_typeof(datos->'lectura') = 'number'
-        and jsonb_typeof(datos->'unidad') = 'string'
-        and jsonb_typeof(datos->'bateria_pct') = 'number'
-        and (datos->>'bateria_pct')::numeric between 0 and 100
-    )
+    constraint fk_lectura_sensor foreign key (id_sensor) references sensores(id_activo)    
 );
 
 -- 6. incidencias, alertas y reportes
