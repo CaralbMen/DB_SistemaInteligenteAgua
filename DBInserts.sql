@@ -435,27 +435,47 @@ INSERT INTO sensores (id_activo, id_elemento_infraestructura, id_aspecto_medicio
     (20, 20, 20);
 
 -- Lecturas
-INSERT INTO Lecturas (fecha_hora, valor_capturado) VALUES
-    ('2026-01-01 08:00:00', 1213.75),
-    ('2026-01-16 08:00:00', 1227.50),
-    ('2026-01-31 08:00:00', 1241.25),
-    ('2026-02-15 08:00:00', 1255.00),
-    ('2026-03-02 08:00:00', 1268.75),
-    ('2026-03-17 08:00:00', 1282.50),
-    ('2026-04-01 08:00:00', 1296.25),
-    ('2026-04-16 08:00:00', 1310.00),
-    ('2026-05-01 08:00:00', 1323.75),
-    ('2026-05-16 08:00:00', 1337.50),
-    ('2026-05-31 08:00:00', 1351.25),
-    ('2026-06-15 08:00:00', 1365.00),
-    ('2026-06-30 08:00:00', 1378.75),
-    ('2026-07-15 08:00:00', 1392.50),
-    ('2026-07-30 08:00:00', 1406.25),
-    ('2026-08-14 08:00:00', 1420.00),
-    ('2026-08-29 08:00:00', 1433.75),
-    ('2026-09-13 08:00:00', 1447.50),
-    ('2026-09-28 08:00:00', 1461.25),
-    ('2026-10-13 08:00:00', 1475.00);
+INSERT INTO Lecturas (id_sensor, fecha_hora, datos) VALUES
+    (1, '2026-01-01 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"caudal": 12.4}}'::jsonb),
+    (2, '2026-01-16 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"presion": 245.8}}'::jsonb),
+    (3, '2026-01-31 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"nivel": 7.2}}'::jsonb),
+    (4, '2026-02-15 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"ph": 7.1}}'::jsonb),
+    (5, '2026-03-02 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"turbidez": 1.8}}'::jsonb),
+    (6, '2026-03-17 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"temperatura": 19.6}}'::jsonb),
+    (7, '2026-04-01 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"conductividad": 420.5}}'::jsonb),
+    (8, '2026-04-16 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"cloro_residual": 0.72}}'::jsonb),
+    (9, '2026-05-01 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"flujo_acumulado": 1323.75}}'::jsonb),
+    (10, '2026-05-16 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"presion_diferencial": 38.4}}'::jsonb),
+    (11, '2026-05-31 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"vibracion": 2.4}}'::jsonb),
+    (12, '2026-06-15 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"consumo_electrico": 8.6}}'::jsonb),
+    (13, '2026-06-30 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"humedad": 64.2}}'::jsonb),
+    (14, '2026-07-15 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"oxigeno_disuelto": 7.8}}'::jsonb),
+    (15, '2026-07-30 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"solidos_disueltos": 285.6}}'::jsonb),
+    (16, '2026-08-14 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"color_agua": 5.0}}'::jsonb),
+    (17, '2026-08-29 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"apertura_valvula": 75.0}}'::jsonb),
+    (18, '2026-09-13 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"velocidad_flujo": 1.4}}'::jsonb),
+    (19, '2026-09-28 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"nivel_cloro": 0.68}}'::jsonb),
+    (20, '2026-10-13 08:00:00', '{"tipo_lectura": "monitoreo", "valores": {"calidad_general": 96.3}}'::jsonb),
+    (1, '2026-01-01 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 1, "valor_capturado": 1213.75}'::jsonb),
+    (2, '2026-01-16 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 2, "valor_capturado": 1227.50}'::jsonb),
+    (3, '2026-01-31 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 3, "valor_capturado": 1241.25}'::jsonb),
+    (4, '2026-02-15 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 4, "valor_capturado": 1255.00}'::jsonb),
+    (5, '2026-03-02 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 5, "valor_capturado": 1268.75}'::jsonb),
+    (1, '2026-03-17 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 6, "valor_capturado": 1282.50}'::jsonb),
+    (2, '2026-04-01 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 7, "valor_capturado": 1296.25}'::jsonb),
+    (3, '2026-04-16 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 8, "valor_capturado": 1310.00}'::jsonb),
+    (4, '2026-05-01 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 9, "valor_capturado": 1323.75}'::jsonb),
+    (5, '2026-05-16 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 10, "valor_capturado": 1337.50}'::jsonb),
+    (1, '2026-05-31 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 11, "valor_capturado": 1351.25}'::jsonb),
+    (2, '2026-06-15 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 12, "valor_capturado": 1365.00}'::jsonb),
+    (3, '2026-06-30 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 13, "valor_capturado": 1378.75}'::jsonb),
+    (4, '2026-07-15 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 14, "valor_capturado": 1392.50}'::jsonb),
+    (5, '2026-07-30 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 15, "valor_capturado": 1406.25}'::jsonb),
+    (1, '2026-08-14 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 16, "valor_capturado": 1420.00}'::jsonb),
+    (2, '2026-08-29 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 17, "valor_capturado": 1433.75}'::jsonb),
+    (3, '2026-09-13 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 18, "valor_capturado": 1447.50}'::jsonb),
+    (4, '2026-09-28 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 19, "valor_capturado": 1461.25}'::jsonb),
+    (5, '2026-10-13 08:00:00', '{"tipo_lectura": "consumo", "id_servicio": 20, "valor_capturado": 1475.00}'::jsonb);
 
 -- Estados_servicios
 INSERT INTO estados_servicios (estado) VALUES
@@ -502,53 +522,6 @@ INSERT INTO Servicios (id_propiedad, id_medidor, id_estado, id_zona_abastecimien
     (18, 3, 1, 18),
     (19, 4, 1, 19),
     (20, 5, 1, 20);
-
--- Lecturas_consumo
-INSERT INTO lecturas_consumo (id_lectura, id_servicio) VALUES
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (5, 5),
-    (6, 6),
-    (7, 7),
-    (8, 8),
-    (9, 9),
-    (10, 10),
-    (11, 11),
-    (12, 12),
-    (13, 13),
-    (14, 14),
-    (15, 15),
-    (16, 16),
-    (17, 17),
-    (18, 18),
-    (19, 19),
-    (20, 20);
-
--- Lecturas_sensores
-INSERT INTO lecturas_sensores (id_lectura, id_sensor) VALUES
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (5, 5),
-    (6, 6),
-    (7, 7),
-    (8, 8),
-    (9, 9),
-    (10, 10),
-    (11, 11),
-    (12, 12),
-    (13, 13),
-    (14, 14),
-    (15, 15),
-    (16, 16),
-    (17, 17),
-    (18, 18),
-    (19, 19),
-    (20, 20);
-
 
 -- Tipos_incidencias
 INSERT INTO Tipos_incidencias (tipo, descripcion) VALUES
